@@ -3,9 +3,9 @@ from schema.getter_dict import PeeweeGetterDict
 
 
 class ActorSchema(BaseModel):
-    username: str
-    password1: str
-    password2: str
+    name: str
+    age: int
+    gender: str
 
     class Config:
         orm_mode = True

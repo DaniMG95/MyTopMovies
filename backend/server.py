@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()
 from db import mysql_db
 from resources import actors, movies, common_actors, performances
-
+from model import actor, movie
 
 
 
@@ -19,6 +19,7 @@ app.include_router(performances.router)
 def before_request():
     if mysql_db.is_closed():
         mysql_db.connect()
+    mysql_db.create_tables([actor.Actor, movie.Movie, movie.ActorsMovies])
 
 @app.on_event("shutdown")
 def after_request(response):

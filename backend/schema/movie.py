@@ -3,13 +3,13 @@ from schena.getter_dict import PeeweeGetterDict
 
 
 class MovieCreate(BaseModel):
-    name: str
-    rating: float
+    title: str
+    category: str
 
 
 class MovieSchema(MovieCreate):
     id: int
-    user_id: int
+    actor_id: int
 
     class Config:
         orm_mode = True
