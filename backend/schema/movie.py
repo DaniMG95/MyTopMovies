@@ -1,15 +1,21 @@
 from pydantic import BaseModel
-from schena.getter_dict import PeeweeGetterDict
+from typing import List
+from schema.getter_dict import PeeweeGetterDict
+from schema.actor import ActorSchema
 
 
-class MovieCreate(BaseModel):
+class Movie(BaseModel):
     title: str
     category: str
 
 
-class MovieSchema(MovieCreate):
+class MovieCreate(Movie):
+    cast: List[str]
+
+
+class MovieSchema(Movie):
     id: int
-    actor_id: int
+    actors: List[ActorSchema]
 
     class Config:
         orm_mode = True
