@@ -9,7 +9,6 @@ class ActorCreate(BaseModel):
 
 
 class ActorSchema(ActorCreate):
-    id: int
 
     class Config:
         orm_mode = True

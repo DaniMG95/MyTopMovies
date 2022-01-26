@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends, status
 from typing import List
 router = APIRouter(prefix='/movies', tags=["movies"])
-from schema.movie import MovieCreate, MovieSchema
+from schema.movie import MovieSchema
 from model.movie import Movie
 from model.actor import Actor
 
@@ -23,7 +23,7 @@ from model.actor import Actor
 
 
 @router.post("/", response_model=MovieSchema)
-def create_movie(movie: MovieCreate):
+def create_movie(movie: MovieSchema):
     if Movie.get_movie(movie.title):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"the movie's name already exists")
     for actor_name in movie.cast:
@@ -36,7 +36,7 @@ def create_movie(movie: MovieCreate):
     for actor_name in movie.cast:
         actor = Actor.get_actor(actor_name)
         actor.movies.add(new_movie)
-    return new_movie
+    return new_movie.serialize()
 
 
 # GET / movies
@@ -51,5 +51,7 @@ def create_movie(movie: MovieCreate):
 @router.get("/", response_model=List[MovieSchema])
 def get_movie():
     movies = Movie.get_all()
-    return list(movies)
+    movies = [movie.serialize() for movie in movies]
+    return movies
+
 

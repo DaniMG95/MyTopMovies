@@ -30,4 +30,4 @@ async def common_actors(actors: str):
     for actor in actors[1:]:
         aux = [movie for movie in actor.movies]
         movies = intersection(movies, aux)
-    return movies
+    return [movie.serialize() for movie in movies]
