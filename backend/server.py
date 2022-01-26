@@ -19,7 +19,7 @@ app.include_router(performances.router)
 def before_request():
     if mysql_db.is_closed():
         mysql_db.connect()
-    mysql_db.create_tables([actor.Actor, movie.Movie, movie.ActorsMovies])
+    mysql_db.create_tables([actor.Actor, movie.Movie, movie.Movie.actors.get_through_model()])
 
 @app.on_event("shutdown")
 def after_request(response):
