@@ -4,10 +4,22 @@ load_dotenv()
 from db import mysql_db
 from resources import actors, movies, common_actors, performances
 from model import actor, movie
-
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",
+    "http://localhost:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(actors.router)
 app.include_router(movies.router)

@@ -12,7 +12,7 @@ router = APIRouter(prefix='/common_actors', tags=["common_actors"])
 #
 # return
 # 400 if at least one movie does not exist
-# 400 if 'movies' query parameter does not exist
+# 422 if 'movies' query parameter does not exist
 # 200
 # Array<{
 #     "name": string,

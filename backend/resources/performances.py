@@ -9,7 +9,7 @@ router = APIRouter(prefix='/performances', tags=["performances"])
 #
 # return
 # 400 if at least one of the actors does not exist
-# 400 if the 'actors' query parameter is not sent
+# 422 if the 'actors' query parameter is not sent
 # 200
 # Array<{
 #     "title": string,
