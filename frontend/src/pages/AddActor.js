@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment} from 'react';
 import axios from 'axios';
 
 class AddActor extends React.Component {
@@ -25,7 +25,11 @@ class AddActor extends React.Component {
          })
           .then(res => {
             console.log(res)
-        })
+        }).catch(error => {
+          if (error.response.status === 400){
+            alert("This actor exist")
+        }
+      })
     }
 
     render(){
