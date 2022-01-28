@@ -8,7 +8,60 @@ This API will provide endpoints for adding new movies in the platform, querying
 existing ones, adding new actors, querying them, and additional endpoints showing movies
 that some actors have made together, and common actors that appear in the requested movies.
 
-Note: Create a new branch to push your changes.
+The API is developed with FastApi ant Frontend use React.
+
+## Install and launch the server
+
+### API
+
+For the database we have used a mysql docker which stored the data in volume and create database, passing the commands launched for its creation.
+
+```
+docker volume create db
+docker run --name db_project -v db:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=test -p 3302:3306 -d mysql
+docker exec -it db_project bash
+mysql --host=localhost --user=root --password=test
+create database test;
+```
+
+If you have the docker created and you want to launch it you must put the following
+
+```
+docker start db_project
+```
+
+
+You must also create an .env file with the environment variables with the database server configuration as shown in the .env.example.
+Here is an example of the .env
+```
+DATABASE=test
+USER=root
+PASSWORD=test
+HOST=localhost
+PORT=3302
+```
+
+
+To launch the application it is necessary to have python3 installed and launch the following steps.
+
+```
+cd backend
+pip install -r requirements
+uvicorn server:app
+```
+
+You can view the API documentation at the following [http://localhost:8000/docs](http://localhost:8000/docs). 
+
+### FRONTEND
+
+To launch the application it is necessary to have node installed and launch the following steps.
+
+```
+cd frontend
+npm install
+npm start
+```
+
 
 ## API endpoints
 
@@ -99,22 +152,3 @@ Array<{
 }> (list of actors that appear in all requested movies)
 ```
 
-### Project requirements
-- Create the API that exposes all the requested endpoints in the language/framework you are more
-  comfortable with.
-- Create a README.md explaining how to install and launch the server.
-- Implement automatic testing
-- There is no need to implement a persistance layer or a deployment pipeline, but it would be nice
-  if you explain how would you do it in a production environment.
-- Create the Frontend side using React. In order to make it simple, the user will be allowed to perform just the operations related to movies, create the pages required: 
-  - add new movies (route: /addmovie).
-  - get all movies (route: /movies).
-  - get movies in which all the requested actors appear (route: /movies). 
-  
-### Helpful take-home project guidelines:
-- This project will be used to evaluate your skills, and should be fully functional without any obvious missing pieces. 
-  We will evaluate the project as if you were delivering it to a customer.
-- The deadline to submit your completed project is 5 days from the date you received the project requirements.
-- If you schedule your final interview after the 5-days deadline, make sure to submit your completed project and all 
-  code to the private repository before the deadline. Everything that is submitted after the deadline will not be taken 
-  into consideration.
