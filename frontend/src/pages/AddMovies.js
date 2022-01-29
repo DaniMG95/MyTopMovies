@@ -52,6 +52,7 @@ class AddMovies extends React.Component {
          })
           .then(res => {
             console.log(res)
+            alert("Movie create")
         }).catch(error => {
           if (error.response.status === 400){
           alert("This movie exist")

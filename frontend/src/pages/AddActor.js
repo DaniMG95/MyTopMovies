@@ -25,6 +25,7 @@ class AddActor extends React.Component {
          })
           .then(res => {
             console.log(res)
+            alert("Actor create")
         }).catch(error => {
           if (error.response.status === 400){
             alert("This actor exist")
